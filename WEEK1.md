@@ -1,4 +1,4 @@
-# Classroom material
+﻿# Classroom material
 
 ## Structure of the program
   * Team
@@ -328,7 +328,7 @@ Play as many rounds as needed till everyone is comfortable with git conflict res
         CTO_OFFICE,34
         HEXAVARSIT,27
     ```
-        * In our codebase, search and print all lines in java code (files w/ .java suffix), where there is a "FTP" or a "ftp" string
+        * In our codebase, search and p-erint all lines in java code (files w/ .java suffix), where there is a "FTP" or a "ftp" string
       * Database Queries via SQL
          * Given that the same data as in employee.csv is there in a mysql table EMP, give an SQL query
             * id and the initials of the employee with the maximum leave_available

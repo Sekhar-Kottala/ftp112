@@ -2,16 +2,15 @@ package com.hexaware.FTP112.persistence;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
-import com.hexaware.FTP112.model.Menu;
-
+import com.hexaware.FTP112.model.OrderItems;
 import org.skife.jdbi.v2.tweak.ResultSetMapper;
 import org.skife.jdbi.v2.StatementContext;
+import com.hexaware.FTP112.model.OrderStatus;
 /**
  * MenuMapper class used to fetch menu data from database.
  * @author hexware
  */
-public class MenuMapper implements ResultSetMapper<Menu> {
+public class OrderItemsMapper implements ResultSetMapper<OrderItems> {
     /**
      * @param idx the index
      * @param rs the resultset
@@ -19,11 +18,11 @@ public class MenuMapper implements ResultSetMapper<Menu> {
      * @return the mapped customer object
      * @throws SQLException in case there is an error in fetching data from the resultset
      */
-  public final Menu map(final int idx, final ResultSet rs, final StatementContext ctx) throws SQLException {
+  public final OrderItems map(final int idx, final ResultSet rs, final StatementContext ctx) throws SQLException {
       /**
-       * @return Menu
+       * @return OrderITems
        */
-    return new Menu(rs.getInt("MEN_ID"), rs.getString("men_item"), rs.getDouble("men_calories"),
-                  rs.getInt("ven_id"), rs.getInt("jun_rating"), rs.getString("jun_reviews"), rs.getDouble("jun_price"));
-  }
+    return new OrderItems(rs.getInt("ORD_ITEM_ID"), rs.getInt("MEN_ID"), rs.getDouble("MEN_PRICE"), OrderStatus.valueOf(rs.getString("ORD_STATUS")),
+    rs.getInt("ORD_QUANTITY"),rs.getInt("ORD_ID"));
+    }
 }
