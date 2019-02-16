@@ -17,20 +17,29 @@ public interface VendorDAO {
     @Mapper(VendorMapper.class)
     List<Vendor> show();
     /**
-     * @return the vendor Id.
+     * @return the count.
      * @param venId to initialize vendor id.
+     * @param vendorPassword to initialize vendor password.
      */
   @SqlQuery("select count(*) from vendor where ven_id = :vendorId and ven_password = :vendorPassword;")
     int authenticateVendor(@Bind("vendorId")int venId, @Bind("vendorPassword")String vendorPassword);
-
-    @SqlQuery("Select VEN_BALANCE from vendor where ven_id = :venId;")
+    /**
+     * @return the vendor Balance.
+     * @param venId to initialize vendor id.
+     */
+  @SqlQuery("Select VEN_BALANCE from vendor where ven_id = :venId;")
     double vendorBalance(@Bind("venId")int venId);
-
-
-    @SqlUpdate("update vendor set VEN_BALANCE = :totalOrderPrice where ven_id = :venId;")
+    /**
+     * @param totalOrderPrice to initialize totalOrderPrice.
+     * @param venId to initialize vendor id.
+     */
+  @SqlUpdate("update vendor set VEN_BALANCE = :totalOrderPrice where ven_id = :venId;")
     void vendorWallet(@Bind("totalOrderPrice")double totalOrderPrice, @Bind("venId")int venId);
-
-    @SqlUpdate("update vendor set VEN_BALANCE = ven_balance - :price where ven_id = :vendorId;")
+    /**
+     * @param price to initialize price.
+     * @param vendorId to initialize vendor id.
+     */
+  @SqlUpdate("update vendor set VEN_BALANCE = ven_balance - :price where ven_id = :vendorId;")
     void refund(@Bind("price")double price, @Bind("vendorId")int vendorId);
 
 

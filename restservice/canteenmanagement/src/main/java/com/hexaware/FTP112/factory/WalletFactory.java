@@ -4,7 +4,7 @@ import com.hexaware.FTP112.persistence.WalletDAO;
 import com.hexaware.FTP112.persistence.DbConnection;
 import java.util.List;
 import com.hexaware.FTP112.model.Wallet;
-import com.hexaware.FTP112.util.Validators;
+
 /**
  * WalletFactory class used to fetch Wallet data from database.
  * @author hexware
@@ -48,7 +48,7 @@ public class WalletFactory {
    * @param walletId to initialize wallet id.
    */
   public static void updateWalletAmount(final double totalOrderPrice, final int cusId, final int walletId) {
-    dao().WalletAmount(totalOrderPrice, cusId, walletId);
+    dao().walletAmount(totalOrderPrice, cusId, walletId);
   }
   /**
    * @param price to initialize total Order Price.
@@ -65,5 +65,13 @@ public class WalletFactory {
   public static int findByWalletId(final int walletId) {
     int id = dao().fetchWalletId(walletId);
     return id;
+  }
+  /**
+   * @return Wallet amount.
+   * @param cusId to initialize  cus Id.
+   */
+  public static double fetchtotalAmount(final int cusId) {
+    double amount = dao().fetchWalletTotalAmount(cusId);
+    return amount;
   }
 }

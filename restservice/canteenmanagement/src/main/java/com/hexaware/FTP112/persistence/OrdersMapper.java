@@ -7,7 +7,6 @@ import com.hexaware.FTP112.model.Orders;
 import com.hexaware.FTP112.model.OrderStatus;
 
 
-
 import org.skife.jdbi.v2.tweak.ResultSetMapper;
 import org.skife.jdbi.v2.StatementContext;
 /**
@@ -26,9 +25,15 @@ public class OrdersMapper implements ResultSetMapper<Orders> {
       /**
        * @return Orders
        */
-    return new Orders(rs.getInt("ORD_ID"), rs.getInt("CUS_ID"), rs.getInt("VEN_ID"), rs.getDate("ORD_DATE"),
-     rs.getDouble("TOTAL_ORD_PRICE"), OrderStatus.valueOf(rs.getString("ORD_STATUS")), rs.getString("ORD_COMMENTS"), rs.getInt("WAL_ID"));
+    Orders orders = new Orders(rs.getInt("CUS_ID"), rs.getInt("VEN_ID"),
+        rs.getDouble("TOTAL_ORD_PRICE"), rs.getInt("WAL_ID"));
+    orders.setOrderId(rs.getInt("ORD_ID"));
+    orders.setOrderDate(rs.getDate("ORD_DATE"));
+    orders.setOrderStatus(OrderStatus.valueOf(rs.getString("ORD_STATUS")));
+    orders.setOrderComments(rs.getString("ORD_COMMENTS"));
+    return orders;
   }
 }
+
 
 

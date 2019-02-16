@@ -5,7 +5,7 @@ import com.hexaware.FTP112.persistence.VendorDAO;
 import com.hexaware.FTP112.persistence.DbConnection;
 import java.util.List;
 import com.hexaware.FTP112.model.Vendor;
-import com.hexaware.FTP112.util.Validators;
+
 
 /**
  * MenuFactory class used to fetch vendor data from database.
@@ -30,9 +30,9 @@ public class VendorFactory {
    * Call the data base connection.
    * @return the array of vendor object.
    */
-  public static Vendor[] showVendor() {
+  public static List<Vendor> showVendor() {
     List<Vendor> vendor = dao().show();
-    return vendor.toArray(new Vendor[vendor.size()]);
+    return vendor;
   }
   /**
    * Call the data base connection.
@@ -63,13 +63,18 @@ public class VendorFactory {
   }
   /**
    * Call the data base connection.
-   * @return the vendorId.
-   * @param venId to initialize vendor Id.
+   * @param vendorPassword to initialize vendor Password.
+   * @param vendorId to initialize vendor Id.
    */
   public static void authenticateVendor(final int vendorId, final String vendorPassword) {
-    Validators. validateVendor(vendorId, vendorPassword);
+    Validators.validateVendor(vendorId, vendorPassword);
   }
-
+  /**
+   * Call the data base connection.
+   * @return authentication.
+   * @param vendorPassword to initialize vendor Password.
+   * @param vendorId to initialize vendor Id.
+   */
   public static int findVendor(final int vendorId, final String vendorPassword) {
     int authentication = dao().authenticateVendor(vendorId, vendorPassword);
     return authentication;

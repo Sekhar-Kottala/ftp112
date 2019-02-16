@@ -4,7 +4,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import com.hexaware.FTP112.model.Customer;
-
 import org.skife.jdbi.v2.tweak.ResultSetMapper;
 import org.skife.jdbi.v2.StatementContext;
 /**
@@ -20,7 +19,7 @@ public class CustomerMapper implements ResultSetMapper<Customer> {
      * @throws SQLException in case there is an error in fetching data from the resultset
      */
   public final Customer map(final int idx, final ResultSet rs, final StatementContext ctx)
-  throws SQLException {
+     throws SQLException {
       /**
        * @return Customer
        */

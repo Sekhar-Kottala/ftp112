@@ -1,10 +1,6 @@
 package com.hexaware.FTP112.model;
 
-import com.hexaware.FTP112.persistence.DbConnection;
-import com.hexaware.FTP112.persistence.MenuDAO;
-
 import java.util.Objects;
-import java.util.List;
 
 /**
  * Menu class used to display menu information.
@@ -151,7 +147,7 @@ public class Menu {
     /**
      * @param argMenCalories gets the calories.
      */
-  public final void setMenCalories(final int argMenCalories) {
+  public final void setMenCalories(final double argMenCalories) {
     this.menCalories = argMenCalories;
   }
     /**
@@ -165,21 +161,5 @@ public class Menu {
      */
   public final void setVenPhnNo(final String argVenPhnNo) {
     this.venPhnNo = argVenPhnNo;
-  }
-  /**
-   * Call the data base connection.
-   * @return the connection object.
-   */
-  private static MenuDAO dao() {
-    DbConnection db = new DbConnection();
-    return db.getConnect().onDemand(MenuDAO.class);
-  }
-  /**
-   * Call the data base connection.
-   * @return the array of menu object.
-   */
-  public static Menu[] showMenu() {
-    List<Menu> menu = dao().show();
-    return menu.toArray(new Menu[menu.size()]);
   }
 }

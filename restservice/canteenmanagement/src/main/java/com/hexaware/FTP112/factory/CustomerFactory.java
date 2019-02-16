@@ -4,7 +4,7 @@ import com.hexaware.FTP112.persistence.CustomerDAO;
 import com.hexaware.FTP112.persistence.DbConnection;
 import java.util.List;
 import com.hexaware.FTP112.model.Customer;
-import com.hexaware.FTP112.util.Validators;
+
 /**
  * CustomerFactory class used to fetch menu data from database.
  * @author hexware
@@ -27,10 +27,11 @@ public class CustomerFactory {
   /**
    * Call the data base connection.
    * @return the array of menu object.
+   * @param cusId to initialize customer Id.
    */
-  public static Customer[] showCustomer() {
-    List<Customer> customer = dao().show();
-    return customer.toArray(new Customer[customer.size()]);
+  public static List<Customer> showCustomer(final int cusId) {
+    List<Customer> customer = dao().show(cusId);
+    return customer;
   }
   /**
    * Call the data base connection.
@@ -39,17 +40,19 @@ public class CustomerFactory {
    * @param password to initialize customer password.
    */
   public static int findByCustomerId(final int cusId, final String password) {
-    int count = dao().fetchCustomerId(cusId,password);
+    int count = dao().fetchCustomerId(cusId, password);
     return count;
   }
   /**
    * Call the data base connection.
    * @param cusId to initialize customer Id.
+   * @param password to initialize customer password.
    */
-  public static void authenticateCustomer(final int cusId,  final String password) {
-     Validators.validateCustomer(cusId, password);
+  public static void authenticateCustomer(final int cusId, final String password) {
+    Validators.validateCustomer(cusId, password);
   }
 
 
 }
+
 

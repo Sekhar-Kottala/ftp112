@@ -26,7 +26,7 @@ public class Vendor {
  * @param argsvenPassword to initialize vendor password.
  * @param argsvenBalance to initialize vendor balance.
  * used to get details through constructor.
- */
+
   public Vendor(final int argsvenId, final String argsvenName,
       final String argsvenPhoneNo, final String argsvenUsername,
       final String argsvenPassword, final double argsvenBalance) {
@@ -38,6 +38,7 @@ public class Vendor {
     this.venBalance = argsvenBalance;
 
   }
+  */
   /**
  * @param argsvenId to initialize vendor id.
  * @param argsvenName to initialize vendor name.

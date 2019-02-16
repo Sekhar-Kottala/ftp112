@@ -1,9 +1,7 @@
 package com.hexaware.FTP112.model;
 
-import com.hexaware.FTP112.persistence.DbConnection;
-import com.hexaware.FTP112.persistence.MenuDAO;
 import java.util.Objects;
-import java.util.List;
+
 
 /**
  */
@@ -22,12 +20,7 @@ public class MenuDetails {
   public MenuDetails() {
 
   }
-  /**
-    * @param argmenPrice gets the Menu Price.
-    */
-  public MenuDetails(final double argmenPrice) {
-    this.menPrice = argmenPrice;
-  }
+
   /**
    * @param argMenId to initialize menu id.
    * @param argVenId to initialize vendor id.
@@ -161,25 +154,12 @@ public class MenuDetails {
     * @param argVenPhnNo gets the vendor phone no.
     */
   public final void setVenPhnNo(final String argVenPhnNo) {
-    this.venName = argVenPhnNo;
+    this.venPhnNo = argVenPhnNo;
   }
   /**
     * @param argVenName gets the vwndor name.
     */
   public final void setVenName(final String argVenName) {
-    this.venPhnNo = argVenName;
-  }
-
-  private static MenuDAO dao() {
-    DbConnection db = new DbConnection();
-    return db.getConnect().onDemand(MenuDAO.class);
-  }
-  /**
-   * Call the data base connection.
-   * @return the array of menu object.
-   */
-  public static Menu[] showMenu() {
-    List<Menu> menu = dao().show();
-    return menu.toArray(new Menu[menu.size()]);
+    this.venName = argVenName;
   }
 }

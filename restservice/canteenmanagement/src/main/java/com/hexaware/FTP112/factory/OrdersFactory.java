@@ -6,7 +6,7 @@ import java.util.List;
 import com.hexaware.FTP112.model.Orders;
 import com.hexaware.FTP112.model.OrderStatus;
 import com.hexaware.FTP112.model.OrderItems;
-import com.hexaware.FTP112.util.Validators;
+
 
 /**
  * OrderFactory class used to fetch Orders data from database.
@@ -27,9 +27,18 @@ public class OrdersFactory {
     DbConnection db = new DbConnection();
     return db.getConnect().onDemand(OrdersDAO.class);
   }
-    public static void showPendingOrdId(final int orderItemId) {
-    Validators. validateOrderItemId(orderItemId);
-    }
+  /**
+   * Call the data base connection.
+   * @param orderItemId to initialize the order item id.
+   */
+  public static void showPendingOrdId(final int orderItemId) {
+    Validators.validateOrderItemId(orderItemId);
+  }
+  /**
+   * Call the data base connection.
+   * @return authentication.
+   * @param orderItemId to initialize order item id.
+   */
   public static int findByOrderItemId(final int orderItemId) {
     int authentication = dao().fetchOrderItemId(orderItemId);
     return authentication;
@@ -58,7 +67,7 @@ public class OrdersFactory {
    * @return the result.
    */
   public static int setPlaceOrder(final Orders order) {
-    int result =  dao().placeOrder(order);
+    int result = dao().placeOrder(order);
     return result;
   }
   /**

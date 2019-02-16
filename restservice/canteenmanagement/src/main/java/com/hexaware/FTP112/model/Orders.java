@@ -23,46 +23,20 @@ public class Orders {
   public Orders() {
 
   }
-  /**
-   * @param argOrderPrice to initialize orderPrice.
-   * @param argCusId to initialize cusId.
-   * @param argVenId to initialize venId.
+    /**
+   * @param argCusId to initialize customer Id.
+   * @param argVenId to initialize vendor Id.
+   * @param argTotalOrderPrice to initialize Total Order Price.
+   * @param argWalId to initialize Wallet Id.
    * used to get details through constructor.
    */
-  public Orders(final int argCusId, final int argVenId, final double argOrderPrice) {
-    this.totalOrderPrice = argOrderPrice;
-    this.cusId = argCusId;
-    this.venId = argVenId;
-
-  }
-/**
- *
- @param argsOrderId to initialize orderId.
- @param argsCusId to initialize cusId.
- @param argsvenId to initialize venId.
- @param argsOrderDate to initialize orderdate.
- @param argsOrderPrice to initialize orderPrice.
- @param argsOrderStatus to initialize orderStatus.
- * used to get details through constructor.
- */
-  public Orders(int argCusId, int argVenId, double argTotalOrderPrice, final int argWalId) {
+  public Orders(final int argCusId, final int argVenId, final double argTotalOrderPrice, final int argWalId) {
     this.cusId = argCusId;
     this.venId = argVenId;
     this.totalOrderPrice = argTotalOrderPrice;
     this.walId = argWalId;
   }
 
-  public Orders(final int argOrderId, final int argCusId, final int argVenId, final Date argOrderDate,final double argTotalOrderPrice,final OrderStatus argOrderStatus,
-  final String argOrderComments, final int argWalId) {
-    this.orderId = argOrderId;
-    this.cusId = argCusId;
-    this.venId = argVenId;
-    this.orderDate = argOrderDate;
-    this.totalOrderPrice = argTotalOrderPrice;
-    this.orderStatus = argOrderStatus;
-    this.orderComments = argOrderComments;
-    this.walId = argWalId;
-  }
   /**
    * @param argCusId gets the customer Id.
    */
@@ -99,7 +73,7 @@ public class Orders {
   public final double getTotalOrderPrice() {
     return this.totalOrderPrice;
   }
-      /**
+    /**
      * @param argOrderStatus gets the order comments.
      */
   public final void setOrderStatus(final OrderStatus argOrderStatus) {
@@ -111,27 +85,39 @@ public class Orders {
   public final OrderStatus getOrderStatus() {
     return this.orderStatus;
   }
-    /**
-       * @return this order Date.
-       */
-  public final Date getOrderDate() {
-    return this.orderDate;
+/**
+  * @param argOrderDate gets the order date.
+  */
+  public final void setOrderDate(final Date argOrderDate) {
+    this.orderDate = argOrderDate;
   }
-    /**
-       * @return this order Id.
-       */
+/**
+  * @return this order Date.
+  */
+  public final Date getOrderDate() {
+    return new Date(this.orderDate.getTime());
+  }
+/**
+  * @param argOrderId gets the order Id.
+  */
+  public final void setOrderId(final int argOrderId) {
+    this.orderId = argOrderId;
+  }
+/**
+  * @return this order Id.
+  */
   public final int getOrderId() {
     return this.orderId;
   }
-      /**
-     * @param argOrderComments gets the order comments.
-     */
+/**
+  * @param argOrderComments gets the order comments.
+  */
   public final void setOrderComments(final String argOrderComments) {
     this.orderComments = argOrderComments;
   }
-  /**
-     * @return this order Comments.
-     */
+/**
+  * @return this order Comments.
+  */
   public final String getOrderComments() {
     return this.orderComments;
   }

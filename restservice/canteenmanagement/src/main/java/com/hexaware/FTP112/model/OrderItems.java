@@ -1,8 +1,7 @@
 package com.hexaware.FTP112.model;
-//import com.hexaware.FTP112.persistence.DbConnection;
-//import com.hexaware.FTP112.persistence.OrdersDAO;
+
 import java.util.Objects;
-//import java.util.List;
+
 /**
  * OrderItems class used to display Order items.
  * @author hexaware

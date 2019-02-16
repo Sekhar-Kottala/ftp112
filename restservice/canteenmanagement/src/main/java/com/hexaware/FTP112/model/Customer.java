@@ -20,55 +20,55 @@ public class Customer {
 
   }
 /**
- * @param argscusId to initialize customer id.
- * @param argscusName to initialize customer name.
- * @param argscusPhoneNo to initialize customer phone number.
- * @param argscusUserName to initialize customer username.
+ * @param argCusId to initialize customer id.
+ * @param argCusName to initialize customer name.
+ * @param argCusPhoneNo to initialize customer phone number.
+ * @param argCusUserName to initialize customer username.
  * used to get details through constructor.
  */
-  public Customer(final int argscusId, final String argscusName,
-      final String argscusPhoneNo,
+  public Customer(final int argCusId, final String argCusName,
+      final String argCusPhoneNo,
       //final String argscusEmail,
-      final String argscusUserName) {
-    this.cusId = argscusId;
-    this.cusName = argscusName;
-    this.cusPhoneNo = argscusPhoneNo;
+      final String argCusUserName) {
+    this.cusId = argCusId;
+    this.cusName = argCusName;
+    this.cusPhoneNo = argCusPhoneNo;
     //this.cusEmail = argscusEmail;
-    this.cusUserName = argscusUserName;
+    this.cusUserName = argCusUserName;
     //this.cusPassword = argscusPassword;
   }
   /**
-   * @param argscusId gets the cus id.
+   * @param argCusId gets the cus id.
    */
-  public final void setCusId(final int argscusId) {
-    this.cusId = argscusId;
+  public final void setCusId(final int argCusId) {
+    this.cusId = argCusId;
   }
   /**
-   * @param argscusName gets the cus name.
+   * @param argCusName gets the cus name.
    */
-  public final void setCusName(final String argscusName) {
-    this.cusName = argscusName;
+  public final void setCusName(final String argCusName) {
+    this.cusName = argCusName;
   }
   /**
-   * @param argscusPhoneNo gets the cus phone no.
+   * @param argCusPhoneNo gets the cus phone no.
    */
-  public final void setCusPhoneNo(final String argscusPhoneNo) {
-    this.cusPhoneNo = argscusPhoneNo;
+  public final void setCusPhoneNo(final String argCusPhoneNo) {
+    this.cusPhoneNo = argCusPhoneNo;
   }
   /**
-   * @param argscusEmail gets the cus email.
+   * @param argCusEmail gets the cus email.
    */
   //public final void setCusEmail(final String argscusEmail) {
     //this.cusEmail = argscusEmail;
  // }
   /**
-   * @param argscusUserName gets the cus user name.
+   * @param argCusUserName gets the cus user name.
    */
-  public final void setCusUserName(final String argscusUserName) {
-    this.cusUserName = argscusUserName;
+  public final void setCusUserName(final String argCusUserName) {
+    this.cusUserName = argCusUserName;
   }
   /**
-   * @param argscusPassword gets the cus password.
+   * @param argCusPassword gets the cus password.
    */
  // public final void setCusPassword(final String argscusPassword) {
   //  this.cusPassword = argscusPassword;

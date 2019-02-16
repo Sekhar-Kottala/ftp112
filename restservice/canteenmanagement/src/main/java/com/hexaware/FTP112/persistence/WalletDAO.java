@@ -24,11 +24,19 @@ public interface WalletDAO {
      */
   @SqlQuery("select wal_amount from wallet where wal_id = :walletId;")
     double getWalletAmount(@Bind("walletId")double walletId);
-
-    @SqlUpdate("update wallet set wal_amount = :totalOrderPrice where cus_id = :cusId and wal_id = :walletId;")
-    void WalletAmount(@Bind("totalOrderPrice")double totalOrderPrice, @Bind("cusId")int cusId, @Bind("walletId")int walletId);
-
-    @SqlUpdate("update wallet set wal_amount = wal_amount + :price where cus_id = :customerId and wal_id = :walletId;")
+    /**
+     *@param totalOrderPrice to initialize totalOrderPrice.
+     *@param cusId to initialize Customer Id.
+     *@param walletId to initialize wallet amount.
+     */
+  @SqlUpdate("update wallet set wal_amount = :totalOrderPrice where cus_id = :cusId and wal_id = :walletId;")
+    void walletAmount(@Bind("totalOrderPrice")double totalOrderPrice, @Bind("cusId")int cusId, @Bind("walletId")int walletId);
+    /**
+     *@param price to initialize Price.
+     *@param customerId to initialize Customer Id.
+     *@param walletId to initialize wallet amount.
+     */
+  @SqlUpdate("update wallet set wal_amount = wal_amount + :price where cus_id = :customerId and wal_id = :walletId;")
     void refundAmount(@Bind("price")double price, @Bind("customerId")int customerId, @Bind("walletId")int walletId);
     /**
      *@return the all the wallet id.
@@ -36,4 +44,10 @@ public interface WalletDAO {
      */
   @SqlQuery("select count(*) from wallet where wal_id = :walletId;")
     int fetchWalletId(@Bind("walletId")int walletId);
+    /**
+     *@return the all the wallet amount.
+     *@param cusId to initialize Customer Id.
+     */
+  @SqlQuery("select SUM(WAL_AMOUNT) from wallet where CUS_ID = :cusId;")
+    double fetchWalletTotalAmount(@Bind("cusId")int cusId);
 }

@@ -11,13 +11,15 @@ import org.skife.jdbi.v2.sqlobject.Bind;
 public interface CustomerDAO {
     /**
      * @return the all the Customer record.
+     * @param cusId to initializing customer Id.
      */
-  @SqlQuery("Select CUS_ID,CUS_NAME,CUS_PHN_NO,CUS_USERNAME from Customer;")
+  @SqlQuery("Select CUS_ID,CUS_NAME,CUS_PHN_NO,CUS_USERNAME from Customer where cus_id = :cusId;")
     @Mapper(CustomerMapper.class)
-    List<Customer> show();
+    List<Customer> show(@Bind("cusId")int cusId);
     /**
      * @return the all the cus_id.
      * @param cusId to initializing customer Id.
+     * @param password to initializing password.
      */
   @SqlQuery("select count(*) from customer where cus_id = :cusId and CUS_PASSWORD = :password;")
     int fetchCustomerId(@Bind("cusId")int cusId, @Bind("password")String password);
