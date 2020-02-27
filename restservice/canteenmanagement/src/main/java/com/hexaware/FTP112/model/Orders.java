@@ -3,19 +3,30 @@ package com.hexaware.FTP112.model;
 
 import java.util.Objects;
 import java.util.Date;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 /**
  * Orders class used to display Orders information.
- * @author hexware
+ * @author hexaware.
  */
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Orders {
+/**
+ * orders to store order.
+ */
   private int orderId;
   private int cusId;
   private int venId;
   private double totalOrderPrice;
   private OrderStatus orderStatus;
   private String orderComments;
+  private String cusName;
+  private String walletSource;
+  private String venName;
+  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy hh:mm:ss")
   private Date orderDate;
+  //private List<OrderItems> orderItems;
   private int walId;
   /**
    * Default Constructor.
@@ -95,7 +106,7 @@ public class Orders {
   * @return this order Date.
   */
   public final Date getOrderDate() {
-    return new Date(this.orderDate.getTime());
+    return this.orderDate;
   }
 /**
   * @param argOrderId gets the order Id.
@@ -124,14 +135,51 @@ public class Orders {
 /**
  * @param argWalId gets the wallet id.
  */
-  public final void setWalletId(final int argWalId) {
+  public final void setWalId(final int argWalId) {
     this.walId = argWalId;
   }
 /**
  * @return this order Comments.
  */
-  public final int getWalletId() {
+  public final int getWalId() {
     return this.walId;
+  }
+/**
+  * @param argWalletSource gets the walletSource.
+  */
+  public final void setWalletSource(final String argWalletSource) {
+    this.walletSource = argWalletSource;
+  }
+/**
+  * @return this walletSource.
+  */
+  public final String getWalletSource() {
+    return this.walletSource;
+  }
+
+/**
+  * @param argCusName gets the cusName.
+  */
+  public final void setCusName(final String argCusName) {
+    this.cusName = argCusName;
+  }
+/**
+  * @return this cusName.
+  */
+  public final String getCusName() {
+    return this.cusName;
+  }
+/**
+  * @param argVenName gets the cusName.
+  */
+  public final void setVenName(final String argVenName) {
+    this.venName = argVenName;
+  }
+/**
+  * @return this cusName.
+  */
+  public final String getVenName() {
+    return this.venName;
   }
   @Override
   public final boolean equals(final Object obj) {
@@ -147,14 +195,15 @@ public class Orders {
         && Objects.equals(totalOrderPrice, orders.getTotalOrderPrice())
         && Objects.equals(orderStatus, orders.getOrderStatus())
         && Objects.equals(orderComments, orders.getOrderComments())
-        && Objects.equals(walId, orders.getWalletId())) {
+        && Objects.equals(walId, orders.getWalId())
+       /* && Objects.equals(orderItems, orders.getOrderItems())*/) {
       return true;
     }
     return false;
   }
   @Override
     public final int hashCode() {
-    return Objects.hash(cusId, venId, totalOrderPrice, orderStatus, orderComments, walId);
+    return Objects.hash(cusId, venId, totalOrderPrice, orderStatus, orderComments, walId /*, orderItems*/);
   }
 
 }

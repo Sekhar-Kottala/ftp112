@@ -83,6 +83,13 @@ public class OrdersFactory {
   public static void updateStatus(final int  orderItemId, final OrderStatus status) {
     dao().updateOrderStatus(orderItemId, status);
   }
+    /**
+   * @param orderId to initialize order item id.
+   * @param orderComments to initialize status.
+   */
+  public static void updateComments(final int  orderId, final String orderComments) {
+    dao().updateOrderComments(orderId, orderComments);
+  }
   /**
    * @param vendorId to initialize vendor Id.
    * @return the vendorHistory.
@@ -90,6 +97,16 @@ public class OrdersFactory {
   public static List<Orders> showVendorHistory(final int vendorId) {
     List<Orders> vendorHistory = dao().vendorHistory(vendorId);
     return vendorHistory;
+  }
+  /**
+   * @param vendorId to initialize vendor Id.
+   * @param date1 to initialize vendor Id.
+   * @param date2 to initialize vendor Id.
+   * @return the vendorOrders.
+   */
+  public static double showBetween(final int vendorId, final String date1, final String date2) {
+    double vendorOrders = dao().showBetween(vendorId, date1, date2);
+    return vendorOrders;
   }
   /**
    * @param vendorId to initialize vendor Id.
@@ -123,5 +140,23 @@ public class OrdersFactory {
    */
   public static void updateTotalPrice(final double price, final int orderItemId) {
     dao().updateTotalPrice(price, orderItemId);
+  }
+  /**
+   * @param vendorId to initialize vendor id.
+   * @param orderItemId to initialize order Item Id.
+   * @return the count.
+   */
+  public static int findByOrderItemIdByVenId(final int vendorId, final int orderItemId) {
+    int count = dao().findByOrderItemByVen(vendorId, orderItemId);
+    return count;
+  }
+
+  /**
+   * @param orderId to initialize vendor id.
+   * @return the count.
+   */
+  public static Orders getOrders(final int orderId) {
+    Orders orders = dao().getOrders(orderId);
+    return orders;
   }
 }

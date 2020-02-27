@@ -74,7 +74,7 @@ public class WalletFactoryTest {
   @Test
   public final void findByWalletIdTest(@Mocked final WalletDAO dao) {
     new Expectations() { {
-        dao.fetchWalletId(1); result = 1;
+        dao.fetchWalletId(1, 1); result = 1;
       } };
     new MockUp<WalletFactory>() {
         @Mock
@@ -82,10 +82,10 @@ public class WalletFactoryTest {
             return dao;
         }
     };
-    int wallId = WalletFactory.findByWalletId(1);
+    int wallId = WalletFactory.findByWalletId(1, 1);
     assertEquals(1, wallId);
     new Verifications() { {
-        dao.fetchWalletId(1); times = 1;
+        dao.fetchWalletId(1, 1); times = 1;
       }
     };
   }
@@ -139,13 +139,13 @@ public class WalletFactoryTest {
   public final void getWalletBalanceInvalidData(@Mocked final WalletDAO dao) {
     new MockUp<Validators>() {
         @Mock
-         public final void validateWalletId(final int walletId) {
+         public final void validateWalletId(final int walletId, final int cusId) {
           throw new IllegalArgumentException("Invalid wallet Id Id");
         }
     };
 
     try {
-      WalletFactory.getWalletBalance(1);
+      WalletFactory.getWalletBalance(1, 1);
       fail("Validation Failed");
     } catch (IllegalArgumentException e) {
       assertEquals(e.getMessage(), "Invalid wallet Id Id");
@@ -160,7 +160,7 @@ public class WalletFactoryTest {
   public final void getWalletBalanceValidData(@Mocked final WalletDAO dao) {
     new MockUp<Validators>() {
       @Mock
-         public final void validateWalletId(final int walletId) {
+         public final void validateWalletId(final int walletId, final int cusId) {
         } };
     new MockUp<WalletFactory>() {
         @Mock
@@ -171,7 +171,7 @@ public class WalletFactoryTest {
         dao.getWalletAmount(5); result = 50.00;
       } };
     try {
-      double value = WalletFactory.getWalletBalance(5);
+      double value = WalletFactory.getWalletBalance(5, 1);
       assertEquals(50.00, value, 0);
     } catch (IllegalArgumentException e) {
       fail("validation failed");

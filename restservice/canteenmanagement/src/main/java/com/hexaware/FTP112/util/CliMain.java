@@ -15,8 +15,6 @@ import com.hexaware.FTP112.model.OrderItems;
 
 
 
-
-
 import java.util.List;
 /**
  * CliMain used as Client interface for java coading.
@@ -37,7 +35,8 @@ class CliMain {
     System.out.println("4. Vendor Details");
     System.out.println("5. Show pending orders");
     System.out.println("6. Orders History");
-    System.out.println("7. Exit");
+    System.out.println("7. GST calculation for vendor");
+    System.out.println("8. Exit");
 
     mainMenuDetails();
   }
@@ -68,9 +67,11 @@ class CliMain {
           showOrderHistory();
           break;
         case 7:
+          betweenDates();
+        case 8:
           Runtime.getRuntime().halt(0);
         default:
-          System.out.println("Choose from 1 - 7");
+          System.out.println("Choose from 1 - 8");
       }
     } catch (Exception e) {
       e.printStackTrace();
@@ -83,7 +84,7 @@ class CliMain {
  * showFullMenu method  display the menu item stored in database.
  */
   private void showFullMenu() {
-    Menu[] menu = MenuFactory.showMenu();
+    List<Menu> menu = MenuFactory.showMenu();
     System.out.println("----------------------------------------------------------"
         + "---------------------------------------------------------------------------------");
     System.out.printf("%5s %20s %20s %20s %20s %20s %20s", "Menu Id",
@@ -149,12 +150,12 @@ class CliMain {
     System.out.println("Enter the wallet id of your choice");
     int walletId = option.nextInt();
     try {
-      WalletFactory.getWalletBalance(walletId);
+      WalletFactory.getWalletBalance(walletId, cusId);
     } catch (IllegalArgumentException e) {
       System.out.println(e.getMessage());
       mainMenu();
     }
-    double walAmount = WalletFactory.getWalletBalance(walletId);
+    double walAmount = WalletFactory.getWalletBalance(walletId, cusId);
     if (walAmount > totalOrderPrice) {
       Orders newOrder = new Orders(cusId, venId, totalOrderPrice, walletId);
       int orderId = OrdersFactory.setPlaceOrder(newOrder);
@@ -211,7 +212,9 @@ class CliMain {
  * showVendorDetails method  display the vendor details stored in database.
  */
   private void showVendorDetails() {
-    List<Vendor> vendorList = VendorFactory.showVendor();
+    System.out.println("Enter your vendor ID");
+    int venId = option.nextInt();
+    List<Vendor> vendorList = VendorFactory.showVendor(venId);
     System.out.println("--------------------------------------------------------------------------------------------------");
     System.out.printf("%10s %20s %20s %20s %20s", "Vendor Id", "Vendor Name", "Vendor Phone", "Vendor Username", "Vendor Balance");
     System.out.println();
@@ -292,19 +295,21 @@ class CliMain {
         mainMenu();
       }
       List<Orders> cusHistory = OrdersFactory.showCustomerHistory(customerId);
-      System.out.println("--------------------------------------------------------------------------------------------------");
-      System.out.printf("%10s %15s %15s %15s %20s %20s %20s %15s", "Order ID",
+      System.out.println("-----------------------------------------------------------"
+                         + "------------------------------------------------------------------------------");
+      System.out.printf("%5s %13s %13s %20s %24s %20s %18s %15s", "Order ID",
                 "Customer ID", "Vendor ID", "Order Date", "Total order Price",
                 "Order Status", "Order Comments", "Wallet ID");
       System.out.println();
-      System.out.println("--------------------------------------------------------------------------------------------------");
+      System.out.println("------------------------------------------------------------"
+                         + "------------------------------------------------------------------------------");
 
       for (Orders customerHistory : cusHistory) {
-        System.out.format("%10s %10s %10s %20s %20s %20s %20s %15s",
+        System.out.format("%5s %10s %13s %30s %15s %20s %15s %17s",
                   customerHistory.getOrderId(), customerHistory.getCusId(),
                   customerHistory.getVenId(), customerHistory.getOrderDate(),
                   customerHistory.getTotalOrderPrice(), customerHistory.getOrderStatus(),
-                  customerHistory.getOrderComments(), customerHistory.getWalletId());
+                  customerHistory.getOrderComments(), customerHistory.getWalId());
         System.out.println();
       }
     } else if (choice == 2) {
@@ -319,19 +324,115 @@ class CliMain {
         mainMenu();
       }
       List<Orders> vendorHistory = OrdersFactory.showVendorHistory(vendorId);
-      System.out.println("--------------------------------------------------------------------------------------------------");
-      System.out.printf(" %10s %10s %20s %20s %20s %20s %15s", /*"Order Id",*/
+      System.out.println("---------------------------------------------------------------"
+                      + "----------------------------------------------------------------------");
+      System.out.printf(" %5s %13s %13s %20s %24s %20s %18s %15s", "Order Id",
               "Customer ID", "Vendor ID", "Order Date", "Total order Price",
               "Order Status", "Order Comments", "Wallet ID");
       System.out.println();
-      System.out.println("--------------------------------------------------------------------------------------------------");
+      System.out.println("----------------------------------------------------------------"
+                       + "----------------------------------------------------------------------------");
       for (Orders venHistory : vendorHistory) {
-        System.out.format(" %10s %10s %20s %20s %20s %20s %15s",
-                /*venHistory.getOrderId()*/ venHistory.getCusId(), venHistory.getVenId(),
+        System.out.format(" %5s %10s %13s %30s %15s %20s %15s %17s",
+                venHistory.getOrderId(), venHistory.getCusId(), venHistory.getVenId(),
                 venHistory.getOrderDate(), venHistory.getTotalOrderPrice(), venHistory.getOrderStatus(),
-                venHistory.getOrderComments(), venHistory.getWalletId());
+                venHistory.getOrderComments(), venHistory.getWalId());
         System.out.println();
       }
+    }
+  }
+
+  private void betweenDates() {
+    System.out.println("Enter The Vendor ID");
+    int vendorId = option.nextInt();
+    System.out.println("Enter your password");
+    String vendorPassword = option.next();
+    try {
+      VendorFactory.authenticateVendor(vendorId, vendorPassword);
+    } catch (IllegalArgumentException e) {
+      System.out.println(e.getMessage());
+      mainMenu();
+    }
+    System.out.println("Select the month for GST calculation(1-12)");
+    String date1 = "";
+    String date2 = "";
+    int selected = option.nextInt();
+    try {
+      switch (selected) {
+        case 1:
+          date1 = "2019-01-01";
+          date2 = "2019-01-31";
+          break;
+        case 2:
+          date1 = "2019-02-01";
+          date2 = "2019-02-28";
+          break;
+        case 3:
+          date1 = "2019-03-01";
+          date2 = "2019-03-31";
+          break;
+        case 4:
+          date1 = "2019-04-01";
+          date2 = "2019-04-30";
+          break;
+        case 5:
+          date1 = "2019-05-01";
+          date2 = "2019-05-31";
+          break;
+        case 6:
+          date1 = "2019-06-01";
+          date2 = "2019-06-30";
+          break;
+        case 7:
+          date1 = "2019-07-01";
+          date2 = "2019-07-31";
+          break;
+        case 8:
+          date1 = "2019-08-01";
+          date2 = "2019-08-31";
+          break;
+        case 9:
+          date1 = "2019-09-01";
+          date2 = "2019-09-30";
+          break;
+        case 10:
+          date1 = "2019-10-01";
+          date2 = "2019-10-31";
+          break;
+        case 11:
+          date1 = "2019-11-01";
+          date2 = "2019-11-30";
+          break;
+        case 12:
+          date1 = "2019-12-01";
+          date2 = "2019-12-31";
+          break;
+        default:
+          System.out.println();
+      }
+    } catch (Exception e) {
+      e.printStackTrace();
+      System.out.println("enter a valid value");
+    }
+    if (selected <= 12) {
+      double amount = OrdersFactory.showBetween(vendorId, date1, date2);
+      System.out.println("amount:" + amount);
+      double gst = (amount * 2.5) / 100;
+      System.out.println();
+      System.out.println(" state gst:" + gst);
+      System.out.println();
+      System.out.println(" central gst:" + gst);
+      System.out.println();
+      double amount1 = gst * 2;
+      System.out.println(" total gst:" + amount1);
+      System.out.println();
+      double left = amount - amount1;
+      System.out.println(" Amount Left after gst payment:" + left);
+      System.out.println();
+      mainMenu();
+    } else {
+      System.out.println("You entered a wrong month");
+      mainMenu();
     }
   }
 /**

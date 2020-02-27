@@ -26,6 +26,8 @@ public class CustomerMapperTest {
         resultSet.getInt("CUS_ID"); result =  34;
         resultSet.getString("CUS_NAME"); result = "vinay";
         resultSet.getString("CUS_PHN_NO"); result = "12345";
+        resultSet.getString("CUS_USERNAME"); result = "vinay22";
+        resultSet.getString("CUS_EMAIL"); result = "vinay@gmail.com";
       }
         };
     CustomerMapper customerMapper = new CustomerMapper();
@@ -34,6 +36,8 @@ public class CustomerMapperTest {
     assertEquals(34, customer.getCusId());
     assertEquals("vinay", customer.getCusName());
     assertEquals("12345", customer.getCusPhoneNo());
+    assertEquals("vinay22", customer.getCusUserName());
+    assertEquals("vinay@gmail.com", customer.getCusEmail());
 
     new Verifications() { {
         resultSet.getInt("CUS_ID"); times = 1;

@@ -4,6 +4,8 @@ import com.hexaware.FTP112.persistence.MenuDAO;
 import com.hexaware.FTP112.persistence.DbConnection;
 import java.util.List;
 import com.hexaware.FTP112.model.Menu;
+//import com.hexaware.FTP112.model.MenuDetails;
+
 
 
 /**
@@ -25,13 +27,30 @@ public class MenuFactory {
     DbConnection db = new DbConnection();
     return db.getConnect().onDemand(MenuDAO.class);
   }
+    /**
+   * Call the data base connection.
+   * @return the array of vendor object.
+   * @param menId to initialize menu Id.
+   */
+  public static List<Menu> showVendorName(final int menId) {
+    List<Menu> vendor = dao().showVendorName(menId);
+    return vendor;
+  }
   /**
    * Call the data base connection.
    * @return the array of menu object.
    */
-  public static Menu[] showMenu() {
+  public static List<Menu> showMenu() {
     List<Menu> menu = dao().show();
-    return menu.toArray(new Menu[menu.size()]);
+    return menu;
+  }
+  /**
+   * Call the data base connection.
+   * @return the array of menu object.
+   */
+  public static List<Menu> showMenuAdd() {
+    List<Menu> menu = dao().showadd();
+    return menu;
   }
   /**
    * Call the data base connection.
@@ -45,6 +64,23 @@ public class MenuFactory {
     return orderPrice;
   }
 
+  /**
+   * Call the data base connection.
+   * @param menId to initialize menu Id.
+   * @param venId to initialize vendor Id.
+   * @param price to initialize price.
+   */
+  public static void updateJunction(final int menId, final int venId, final double price) {
+    dao().updateJunction(menId, venId, price);
+  }
+  /**
+   * Call the data base connection.
+   * @param menId to initialize menu Id.
+   * @param venId to initialize vendor Id.
+   */
+  public static void deleteVenMen(final int menId, final int venId) {
+    dao().deleteVenMen(menId, venId);
+  }
   /**
    * Call the data base connection.
    * @param menId to initialize menu Id.

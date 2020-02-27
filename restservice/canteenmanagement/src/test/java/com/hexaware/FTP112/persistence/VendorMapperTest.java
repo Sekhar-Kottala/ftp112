@@ -28,6 +28,7 @@ public class VendorMapperTest {
         resultSet.getString("VEN_PHN_NO"); result = "12345";
         resultSet.getString("VEN_USERNAME"); result = "rocky";
         resultSet.getDouble("VEN_BALANCE"); result = 5000.00;
+        resultSet.getString("VEN_EMAIL"); result = "jennifa@gmail.com";
       }
         };
     VendorMapper vendorMapper = new VendorMapper();
@@ -38,6 +39,7 @@ public class VendorMapperTest {
     assertEquals("12345", vendor.getVenPhoneNo());
     assertEquals("rocky", vendor.getVenUsername());
     assertEquals(5000.00, vendor.getVenBalance(), 0);
+    assertEquals("jennifa@gmail.com", vendor.getVenEmail());
 
     new Verifications() { {
         resultSet.getInt("VEN_ID"); times = 1;

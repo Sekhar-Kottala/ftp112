@@ -22,6 +22,15 @@ public final class Validators {
     }
   }
 /**
+ * @param cusId used to get the user cus Id.
+ */
+  public static void validateCustomerById(final int cusId) {
+    int customer = CustomerFactory.findByCusId(cusId);
+    if (customer == 0) {
+      throw new IllegalArgumentException("Invalid customer Id");
+    }
+  }
+/**
  * @param vendorId used to get the user vendor Id.
  * @param vendorPassword used to get the user vendor Password.
  */
@@ -31,11 +40,21 @@ public final class Validators {
       throw new IllegalArgumentException("Invalid vendor credentials");
     }
   }
+  /**
+ * @param vendorId used to get the user vendor Id.
+ */
+  public static void validateVendorId(final int vendorId) {
+    int authentication = VendorFactory.findVendorId(vendorId);
+    if (authentication == 0) {
+      throw new IllegalArgumentException("Invalid vendor Id");
+    }
+  }
 /**
  * @param walletId used to get the user wallet Id.
+ * @param cusId used to get the user customer Id.
  */
-  public static void validateWalletId(final int walletId) {
-    int wallet = WalletFactory.findByWalletId(walletId);
+  public static void validateWalletId(final int walletId, final int cusId) {
+    int wallet = WalletFactory.findByWalletId(walletId, cusId);
     if (wallet == 0) {
       throw new IllegalArgumentException("Invalid wallet Id");
     }
@@ -66,6 +85,16 @@ public final class Validators {
     int order = OrdersFactory.findByOrderItemId(ordItemId);
     if (order == 0) {
       throw new IllegalArgumentException("Invalid orderitem Id");
+    }
+  }
+/**
+ * @param orderItemId used to get the user orderItemId Id.
+ * @param vendorId used to get the user vendor Id.
+ */
+  public static void validateVenOrdId(final int orderItemId, final int vendorId) {
+    int order = OrdersFactory.findByOrderItemIdByVenId(orderItemId, vendorId);
+    if (order == 0) {
+      throw new IllegalArgumentException("Invalid vendor Id or Order Id");
     }
   }
 }

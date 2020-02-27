@@ -24,6 +24,6 @@ public class CustomerMapper implements ResultSetMapper<Customer> {
        * @return Customer
        */
     return new Customer(rs.getInt("CUS_ID"), rs.getString("CUS_NAME"), rs.getString("CUS_PHN_NO"),
-     rs.getString("CUS_USERNAME"));
+     rs.getString("CUS_USERNAME"), rs.getString("CUS_EMAIL"));
   }
 }

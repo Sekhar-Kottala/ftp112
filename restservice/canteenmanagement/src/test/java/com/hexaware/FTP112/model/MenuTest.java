@@ -100,6 +100,15 @@ public class MenuTest {
     assertEquals("aman", menu.getVenName());
   }
   /**
+    *to test setMenSpeciality Method.
+    */
+  @Test
+   public final void testSetMenSpeciality() {
+    menu.setMenSpeciality("aman");
+    assertNotEquals("none", menu.getMenSpeciality());
+    assertEquals("aman", menu.getMenSpeciality());
+  }
+  /**
     *to test Equals Method.
     */
   @Test

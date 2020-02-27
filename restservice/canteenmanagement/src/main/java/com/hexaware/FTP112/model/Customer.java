@@ -10,9 +10,9 @@ public class Customer {
   private int cusId;
   private String cusName;
   private String cusPhoneNo;
-  //private String cusEmail;
+  private String cusEmail;
   private String cusUserName;
-  //private String cusPassword;
+  private String cusPassword;
   /**
    * Default Constructor.
    */
@@ -24,18 +24,18 @@ public class Customer {
  * @param argCusName to initialize customer name.
  * @param argCusPhoneNo to initialize customer phone number.
  * @param argCusUserName to initialize customer username.
+ * @param argscusEmail to initialize customer username.
  * used to get details through constructor.
  */
   public Customer(final int argCusId, final String argCusName,
       final String argCusPhoneNo,
-      //final String argscusEmail,
-      final String argCusUserName) {
+      final String argCusUserName,
+      final String argscusEmail) {
     this.cusId = argCusId;
     this.cusName = argCusName;
     this.cusPhoneNo = argCusPhoneNo;
-    //this.cusEmail = argscusEmail;
     this.cusUserName = argCusUserName;
-    //this.cusPassword = argscusPassword;
+    this.cusEmail = argscusEmail;
   }
   /**
    * @param argCusId gets the cus id.
@@ -56,11 +56,11 @@ public class Customer {
     this.cusPhoneNo = argCusPhoneNo;
   }
   /**
-   * @param argCusEmail gets the cus email.
+   * @param argscusEmail gets the cus email.
    */
-  //public final void setCusEmail(final String argscusEmail) {
-    //this.cusEmail = argscusEmail;
- // }
+  public final void setCusEmail(final String argscusEmail) {
+    this.cusEmail = argscusEmail;
+  }
   /**
    * @param argCusUserName gets the cus user name.
    */
@@ -68,11 +68,11 @@ public class Customer {
     this.cusUserName = argCusUserName;
   }
   /**
-   * @param argCusPassword gets the cus password.
+   * @param argscusPassword gets the cus password.
    */
- // public final void setCusPassword(final String argscusPassword) {
-  //  this.cusPassword = argscusPassword;
- // }
+  public final void setCusPassword(final String argscusPassword) {
+    this.cusPassword = argscusPassword;
+  }
 
     /**
      * @return this cus ID.
@@ -95,9 +95,9 @@ public class Customer {
     /**
      * @return this cus email.
      */
-  //public final String getCusEmail() {
-    //return this.cusEmail;
-  //}
+  public final String getCusEmail() {
+    return this.cusEmail;
+  }
      /**
      * @return this user name.
      */
@@ -107,9 +107,9 @@ public class Customer {
      /**
      * @return this cus password.
      */
-  //public final String getCusPassword() {
-    //return this.cusPassword;
-  //}
+  public final String getCusPassword() {
+    return this.cusPassword;
+  }
   @Override
     public final boolean equals(final Object obj) {
     if (obj == null) {

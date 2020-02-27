@@ -12,10 +12,12 @@ import org.skife.jdbi.v2.sqlobject.SqlUpdate;
 public interface VendorDAO {
     /**
      * @return the all the Vendor record.
+     * @param venId to initialize vendor id.
      */
-  @SqlQuery("Select VEN_ID,VEN_NAME,VEN_PHN_NO,VEN_USERNAME,VEN_BALANCE from Vendor;")
+  @SqlQuery("Select VEN_ID,VEN_NAME,VEN_PHN_NO,VEN_USERNAME,VEN_EMAIL,VEN_BALANCE from Vendor where  ven_id = :vendorId;")
     @Mapper(VendorMapper.class)
-    List<Vendor> show();
+    List<Vendor> show(@Bind("vendorId")int venId);
+
     /**
      * @return the count.
      * @param venId to initialize vendor id.
@@ -23,6 +25,12 @@ public interface VendorDAO {
      */
   @SqlQuery("select count(*) from vendor where ven_id = :vendorId and ven_password = :vendorPassword;")
     int authenticateVendor(@Bind("vendorId")int venId, @Bind("vendorPassword")String vendorPassword);
+    /**
+     * @return the count.
+     * @param venId to initialize vendor id.
+     */
+  @SqlQuery("select count(*) from vendor where ven_id = :vendorId;")
+    int authenticateVendorId(@Bind("vendorId")int venId);
     /**
      * @return the vendor Balance.
      * @param venId to initialize vendor id.

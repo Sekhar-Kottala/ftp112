@@ -25,6 +25,6 @@ public class VendorMapper implements ResultSetMapper<Vendor> {
        * @return Vendor
        */
     return new Vendor(rs.getInt("VEN_ID"), rs.getString("VEN_NAME"), rs.getString("VEN_PHN_NO"),
-                    rs.getString("VEN_USERNAME"), rs.getDouble("VEN_BALANCE"));
+                    rs.getString("VEN_USERNAME"), rs.getString("VEN_EMAIL"), rs.getDouble("VEN_BALANCE"));
   }
 }

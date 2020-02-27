@@ -36,9 +36,10 @@ public class WalletFactory {
   /**
    * @return Wallet amount.
    * @param walletId to initialize wallet amount.
+   * @param cusId to initialize customer Id.
    */
-  public static double getWalletBalance(final int walletId) {
-    Validators.validateWalletId(walletId);
+  public static double getWalletBalance(final int walletId, final int cusId) {
+    Validators.validateWalletId(walletId, cusId);
     double walAmount = dao().getWalletAmount(walletId);
     return walAmount;
   }
@@ -61,9 +62,10 @@ public class WalletFactory {
   /**
    * @return Wallet amount.
    * @param walletId to initialize wallet amount.
+   * @param cusId to initialize customer Id.
    */
-  public static int findByWalletId(final int walletId) {
-    int id = dao().fetchWalletId(walletId);
+  public static int findByWalletId(final int walletId, final int cusId) {
+    int id = dao().fetchWalletId(walletId, cusId);
     return id;
   }
   /**

@@ -74,11 +74,11 @@ public class OrdersTest {
   * Tests the testSetWalletId methods of the Orders class.
   */
   @Test
-  public final void testSetWalletId() {
-    assertEquals(500, order.getWalletId(), 0);
-    order.setWalletId(502);
-    assertNotEquals(500, order.getWalletId(), 0);
-    assertEquals(502, order.getWalletId(), 0);
+  public final void testSetWalId() {
+    assertEquals(500, order.getWalId(), 0);
+    order.setWalId(502);
+    assertNotEquals(500, order.getWalId(), 0);
+    assertEquals(502, order.getWalId(), 0);
   }
 /**
   * Tests the testSetOrderStatus methods of the Orders class.

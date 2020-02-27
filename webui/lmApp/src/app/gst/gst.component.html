@@ -1,0 +1,21 @@
+<div class="form-group">
+  <h1> Select Month</h1>
+  <select class="form-control" id="list1" min="0" max="100"  [(ngModel)]="selectedQty" (change)="calulateTotalPrice(selectedQty)" name="selectedqty">
+    <option hidden value="default">Select An Option</option>
+    <option [value]="1">January</option>
+    <option [value]="2">February</option>
+    <option [value]="3">March</option>
+    <option [value]="4">April</option>
+    <option [value]="5">May</option>
+    <option [value]="10">June</option>
+    <option [value]="15">July</option>
+    <option [value]="20">August</option>
+    <option [value]="30">September</option>
+    <option [value]="50">October</option>
+    <option [value]="60">November</option>
+    <option [value]="75">December</option>
+  </select>
+</div>
+<div><h1>Central GST: &#8377;{{Gst1?.centralGst |  number:'2.2-2'}}</h1></div>
+<div><h1>State GST: &#8377;{{Gst1?.stateGst |  number:'2.2-2'}}</h1></div>
+<div><h1>Total GST: &#8377; {{Gst1?.totalGst |  number:'2.2-2'}}</h1></div>

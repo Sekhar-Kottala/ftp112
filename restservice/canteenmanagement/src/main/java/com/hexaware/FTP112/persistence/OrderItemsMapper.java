@@ -22,7 +22,10 @@ public class OrderItemsMapper implements ResultSetMapper<OrderItems> {
       /**
        * @return OrderITems
        */
-    return new OrderItems(rs.getInt("ORD_ITEM_ID"), rs.getInt("MEN_ID"), rs.getDouble("MEN_PRICE"), OrderStatus.valueOf(rs.getString("ORD_STATUS")),
-    rs.getInt("ORD_QUANTITY"), rs.getInt("ORD_ID"));
+    OrderItems orderItems = new OrderItems(rs.getInt("ORD_ITEM_ID"), rs.getInt("MEN_ID"), rs.getDouble("MEN_PRICE"),
+        OrderStatus.valueOf(rs.getString("ORD_STATUS")),
+        rs.getInt("ORD_QUANTITY"), rs.getInt("ORD_ID"));
+    orderItems.setMenItem(rs.getString("MEN_ITEM"));
+    return orderItems;
   }
 }

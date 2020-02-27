@@ -105,6 +105,16 @@ public class OrderItemsTest {
     assertEquals(2, orderItems2.getOrderId());
   }
   /**
+    *to test setOrderId Method.
+    */
+  @Test
+   public final void testSetMenItem() {
+    orderItems1.setMenItem("jenni");
+    assertEquals("jenni", orderItems1.getMenItem());
+    orderItems1.setMenItem("jenni1");
+    assertNotEquals("jenni", orderItems1.getMenItem());
+  }
+  /**
     *to test Equals Method.
     */
   @Test

@@ -41,9 +41,10 @@ public interface WalletDAO {
     /**
      *@return the all the wallet id.
      *@param walletId to initialize wallet amount.
+     *@param cusId to initialize customer Id.
      */
-  @SqlQuery("select count(*) from wallet where wal_id = :walletId;")
-    int fetchWalletId(@Bind("walletId")int walletId);
+  @SqlQuery("select count(*) from wallet where wal_id = :walletId and cus_id = :cusId;")
+    int fetchWalletId(@Bind("walletId")int walletId, @Bind("cusId")int cusId);
     /**
      *@return the all the wallet amount.
      *@param cusId to initialize Customer Id.

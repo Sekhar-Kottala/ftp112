@@ -38,7 +38,7 @@ public class OrdersMapperTest {
     assertEquals(56, orders.getCusId());
     assertEquals(77, orders.getVenId());
     assertEquals(75.00, orders.getTotalOrderPrice(), 0);
-    assertEquals(22, orders.getWalletId());
+    assertEquals(22, orders.getWalId());
     assertEquals(OrderStatus.PENDING, orders.getOrderStatus());
     assertEquals("good", orders.getOrderComments());
 

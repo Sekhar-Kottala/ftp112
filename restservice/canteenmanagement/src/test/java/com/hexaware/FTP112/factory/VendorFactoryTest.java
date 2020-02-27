@@ -185,10 +185,10 @@ public class VendorFactoryTest {
         }
         };
     List<Vendor> a = new ArrayList<Vendor>();
-    Vendor v1 = new Vendor(1, "PRIYA", "9876543210", "PRIYA@10", 5000.00);
-    Vendor v2 = new Vendor(2, "ANU", "9976743310", "Anu@22", 6000.00);
-    Vendor v3 = new Vendor(3, "AISHU", "9877653210", "AISHU@08", 4000.00);
-    Vendor v4 = new Vendor(4, "SHREE", "9123498210", "SHREE@33", 8000.00);
+    Vendor v1 = new Vendor(1, "PRIYA", "9876543210", "PRIYA@10", "jennifa@gmail.com", 360.00);
+    Vendor v2 = new Vendor(2, "ANU", "9976743310", "Anu@22", "jennifa@gmail.com", 360.00);
+    Vendor v3 = new Vendor(3, "AISHU", "9877653210", "AISHU@08", "jennifa@gmail.com", 360.00);
+    Vendor v4 = new Vendor(4, "SHREE", "9123498210", "SHREE@33", "jennifa@gmail.com", 360.00);
     a.add(v1);
     a.add(v2);
     a.add(v3);
@@ -196,23 +196,23 @@ public class VendorFactoryTest {
 
     new Expectations() { {
           List<Vendor> a = new ArrayList<Vendor>();
-          Vendor v1 = new Vendor(1, "PRIYA", "9876543210", "PRIYA@10", 5000.00);
-          Vendor v2 = new Vendor(2, "ANU", "9976743310", "Anu@22", 6000.00);
-          Vendor v3 = new Vendor(3, "AISHU", "9877653210", "AISHU@08", 4000.00);
-          Vendor v4 = new Vendor(4, "SHREE", "9123498210", "SHREE@33", 8000.00);
+          Vendor v1 = new Vendor(1, "PRIYA", "9876543210", "PRIYA@10", "jennifa@gmail.com", 360.00);
+          Vendor v2 = new Vendor(2, "ANU", "9976743310", "Anu@22", "jennifa@gmail.com", 360.00);
+          Vendor v3 = new Vendor(3, "AISHU", "9877653210", "AISHU@08", "jennifa@gmail.com", 360.00);
+          Vendor v4 = new Vendor(4, "SHREE", "9123498210", "SHREE@33", "jennifa@gmail.com", 360.00);
           a.add(v1);
           a.add(v2);
           a.add(v3);
           a.add(v4);
-          dao.show(); result = a;
+          dao.show(1); result = a;
           }
     };
-    List<Vendor> vendor = VendorFactory.showVendor();
+    List<Vendor> vendor = VendorFactory.showVendor(1);
     assertEquals(vendor, a);
     assertEquals(vendor.size(), 4);
 
     new Verifications() { {
-          dao.show(); times = 1;
+          dao.show(1); times = 1;
         }
     };
   }
@@ -222,5 +222,29 @@ public class VendorFactoryTest {
   @Test
    public final void testEmptyConstructor() {
     assertNotNull(new VendorFactory());
+  }
+/**
+ *test for updateRefund method.
+ *@param dao is to mock vendor DAO.
+ */
+  @Test
+    public final void findVendorIdTest(@Mocked final VendorDAO dao) {
+    new MockUp<VendorFactory>() {
+      @Mock
+            public VendorDAO dao() {
+        return dao;
+      }
+        };
+    new Expectations() { {
+        dao.authenticateVendorId(200); result = 10;
+        }
+        };
+    int count = VendorFactory.findVendorId(200);
+    assertEquals(count, 10);
+    new Verifications() { {
+        dao.authenticateVendorId(200); times = 1;
+
+        }
+    };
   }
 }

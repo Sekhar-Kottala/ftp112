@@ -17,7 +17,7 @@ public class CustomerTest {
  */
   @Before
     public final void setUp() {
-    customer = new Customer(12, "HARI PRIYA", "9876543210", "HARIPRIYA22");
+    customer = new Customer(12, "HARI PRIYA", "9876543210", "HARIPRIYA22", "jennifa@gmail.com");
   }
   /**
    Test for customer constructor.
@@ -27,6 +27,7 @@ public class CustomerTest {
     assertEquals(12, customer.getCusId());
     assertEquals("HARI PRIYA", customer.getCusName());
     assertEquals("9876543210", customer.getCusPhoneNo());
+    assertEquals("jennifa@gmail.com", customer.getCusEmail());
     assertEquals("HARIPRIYA22", customer.getCusUserName());
   }
   /**
@@ -49,6 +50,16 @@ public class CustomerTest {
     assertNotEquals("HARI PRIYA", customer.getCusName());
     assertEquals("PREETHI", customer.getCusName());
   }
+      /**
+  Test for setting customer Id.
+  */
+  @Test
+    public final void testSetCusPassword() {
+    assertNotEquals("jennifa", customer.getCusPassword());
+    customer.setCusPassword("francis");
+    assertNotEquals("jennifa", customer.getCusPassword());
+    assertEquals("francis", customer.getCusPassword());
+  }
   /**
   Test for setting customer phone number.
   */
@@ -69,13 +80,23 @@ public class CustomerTest {
     assertNotEquals("HARIPRIYA22", customer.getCusUserName());
     assertEquals("PREETHI33", customer.getCusUserName());
   }
+    /**
+  Test for setting customer user name.
+  */
+  @Test
+    public final void testCusEmail() {
+    assertEquals("jennifa@gmail.com", customer.getCusEmail());
+    customer.setCusEmail("jennifa13@gmail.com");
+    assertNotEquals("jennifa@gmail.com", customer.getCusEmail());
+    assertEquals("jennifa13@gmail.com", customer.getCusEmail());
+  }
   /**
   Test for checking equals.
   */
   @Test
     public final void testEquals() {
-    Customer a = new Customer(12, "HARI PRIYA", "9876543210", "HARIPRIYA22");
-    Customer b = new Customer(12, "HARI PRIYA", "9876543210", "HARIPRIYA22");
+    Customer a = new Customer(12, "HARI PRIYA", "9876543210", "HARIPRIYA22", "jennifa@gmail.com");
+    Customer b = new Customer(12, "HARI PRIYA", "9876543210", "HARIPRIYA22", "jennifa@gmail.com");
     assertTrue(a.equals(b) && b.equals(a));
   }
   /**
@@ -84,8 +105,8 @@ public class CustomerTest {
 
   @Test
     public final void testNotEquals() {
-    Customer a = new Customer(15, "HARI PRIYA", "9876543210", "HARIPRIYA32");
-    Customer b = new Customer(12, "HARI PRIYA", "9876543210", "HARIPRIYA22");
+    Customer a = new Customer(15, "HARI PRIYA", "9876543210", "HARIPRIYA32", "jennifa@gmail.com");
+    Customer b = new Customer(12, "HARI PRIYA", "9876543210", "HARIPRIYA22", "jennifa@gmail.com");
     assertFalse(a.equals(b) && b.equals(a));
   }
   /**
@@ -94,8 +115,8 @@ public class CustomerTest {
 
   @Test
     public final void testHashCodeEquals() {
-    Customer a = new Customer(12, "HARI PRIYA", "9876543210", "HARIPRIYA22");
-    Customer b = new Customer(12, "HARI PRIYA", "9876543210", "HARIPRIYA22");
+    Customer a = new Customer(12, "HARI PRIYA", "9876543210", "HARIPRIYA22", "jennifa@gmail.com");
+    Customer b = new Customer(12, "HARI PRIYA", "9876543210", "HARIPRIYA22", "jennifa@gmail.com");
     assertTrue(a.hashCode() == b.hashCode());
   }
   /**
@@ -104,8 +125,8 @@ public class CustomerTest {
 
   @Test
     public final void testHashCodeNotEquals() {
-    Customer a = new Customer(15, "HARI PRIYA", "9876543210", "HARIPRIYA32");
-    Customer b = new Customer(12, "HARI PRIYA", "9876543210", "HARIPRIYA22");
+    Customer a = new Customer(15, "HARI PRIYA", "9876543210", "HARIPRIYA32", "jennifa@gmail.com");
+    Customer b = new Customer(12, "HARI PRIYA", "9876543210", "HARIPRIYA22", "jennifa@gmail.com");
     assertFalse(a.hashCode() == b.hashCode());
   }
  /**

@@ -1,14 +1,17 @@
 package com.hexaware.FTP112.model;
 
 import java.util.Objects;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 /**
  * OrderItems class used to display Order items.
  * @author hexaware
  */
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class OrderItems {
   private int orderItemId;
   private int menId;
+  private String menItem;
   private double price;
   private OrderStatus status;
   private int quantity;
@@ -106,11 +109,23 @@ public class OrderItems {
   public final int getOrderId() {
     return orderId;
   }
+    /**
+    *@return MenItem.
+    */
+  public final String getMenItem() {
+    return menItem;
+  }
    /**
      * @param argMenId gets the Menu id.
      */
   public final void setMenId(final int argMenId) {
     this.menId = argMenId;
+  }
+   /**
+     * @param argMenItem gets the Menu Item.
+     */
+  public final void setMenItem(final String argMenItem) {
+    this.menItem = argMenItem;
   }
    /**
      * @param argOrderItemId gets the order item Id.

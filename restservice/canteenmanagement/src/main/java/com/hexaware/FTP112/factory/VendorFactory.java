@@ -29,9 +29,10 @@ public class VendorFactory {
   /**
    * Call the data base connection.
    * @return the array of vendor object.
+   * @param venId to initialize vendor Id.
    */
-  public static List<Vendor> showVendor() {
-    List<Vendor> vendor = dao().show();
+  public static List<Vendor> showVendor(final int venId) {
+    List<Vendor> vendor = dao().show(venId);
     return vendor;
   }
   /**
@@ -43,7 +44,6 @@ public class VendorFactory {
     double vendorBalance = dao().vendorBalance(venId);
     return vendorBalance;
   }
-
   /**
    * Call the data base connection.
    * @param venId to initialize vendor Id.
@@ -77,6 +77,15 @@ public class VendorFactory {
    */
   public static int findVendor(final int vendorId, final String vendorPassword) {
     int authentication = dao().authenticateVendor(vendorId, vendorPassword);
+    return authentication;
+  }
+  /**
+   * Call the data base connection.
+   * @return authentication.
+   * @param vendorId to initialize vendor Id.
+   */
+  public static int findVendorId(final int vendorId) {
+    int authentication = dao().authenticateVendorId(vendorId);
     return authentication;
   }
 }

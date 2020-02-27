@@ -12,6 +12,7 @@ public class Vendor {
   private String venUsername;
   private String venPassword;
   private double venBalance;
+  private String venEmail;
 /**
    * Default Constructor.
    */
@@ -45,16 +46,18 @@ public class Vendor {
  * @param argsvenPhoneNo to initialize vendor phone no.
  * @param argsvenUsername to initialize vendor username.
  * @param argsvenBalance to initialize vendor balance.
+ * @param argsvenEmail to initialize venEmail.
  * used to get details through constructor.
  */
   public Vendor(final int argsvenId, final String argsvenName,
       final String argsvenPhoneNo, final String argsvenUsername,
-      final double argsvenBalance) {
+      final String argsvenEmail, final double argsvenBalance) {
     this.venId = argsvenId;
     this.venName = argsvenName;
     this.venPhoneNo = argsvenPhoneNo;
     this.venUsername = argsvenUsername;
     this.venBalance = argsvenBalance;
+    this.venEmail = argsvenEmail;
 
   }
   /**
@@ -96,6 +99,18 @@ public class Vendor {
    */
   public final void setVenBalance(final double argsvenBalance) {
     this.venBalance = argsvenBalance;
+  }
+/**
+ * @param argsVenEmail to get Vendor email.
+   */
+  public final void setVenEmail(final String argsVenEmail) {
+    this.venEmail = argsVenEmail;
+  }
+/**
+ * @return this venEmail.
+     */
+  public final String getVenEmail() {
+    return this.venEmail;
   }
 
 /**

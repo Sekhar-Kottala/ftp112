@@ -34,6 +34,24 @@ public class ValidatorsTest {
     }
   }
 
+/**
+*to test validate Customer Test Validity method.
+*/
+  @Test
+  public final void validateCustomerTestValidity() {
+    new MockUp<CustomerFactory>() {
+        @Mock
+        public final int findByCusId(final int cusId) {
+        return 5;
+        }
+    };
+    try {
+      Validators.validateCustomerById(10);
+    } catch (IllegalArgumentException e) {
+      fail("validation failed");
+    }
+  }
+
 
 /**
 *to test validate Invalid Customer method.
@@ -55,7 +73,25 @@ public class ValidatorsTest {
     }
   }
 
-
+/**
+*to test validate Invalid Customer method.
+*/
+  @Test
+  public final void validateInvalidCustomerId() {
+    new MockUp<CustomerFactory>() {
+        @Mock
+        public final int findByCusId(final int cusId) {
+        return 0;
+        }
+      };
+    try {
+      Validators.validateCustomerById(10);
+      fail("validation failed");
+    } catch (IllegalArgumentException e) {
+      assertNotNull(e);
+      assertEquals("Invalid customer Id", e.getMessage());
+    }
+  }
 
 /**
 *to test validate Vendor method.
@@ -104,12 +140,12 @@ public class ValidatorsTest {
   public final void validateWalletIdValid() {
     new MockUp<WalletFactory>() {
         @Mock
-        public final int findByWalletId(final int walletId) {
+        public final int findByWalletId(final int walletId, final int cusId) {
         return 5;
         }
     };
     try {
-      Validators.validateWalletId(10);
+      Validators.validateWalletId(10, 10);
     } catch (IllegalArgumentException e) {
       fail("validation failed");
     }
@@ -123,12 +159,12 @@ public class ValidatorsTest {
   public final void validateWalletIdInvalid() {
     new MockUp<WalletFactory>() {
         @Mock
-        public final int findByWalletId(final int walletId) {
+        public final int findByWalletId(final int walletId, final int cusId) {
         return 0;
         }
       };
     try {
-      Validators.validateWalletId(10);
+      Validators.validateWalletId(10, 10);
       fail("validation failed");
     } catch (IllegalArgumentException e) {
       assertNotNull(e);
@@ -256,12 +292,83 @@ public class ValidatorsTest {
       assertEquals("Invalid orderitem Id", e.getMessage());
     }
   }
-
   /**
    * Test method for Validator Constructor.
    */
   @Test
    public final void testValidatorConstructor() {
     assertNotNull(new Validators());
+  }
+/**
+*to test validate Vendor Id method and Order item Id.
+*/
+  @Test
+  public final void validateVenOrdIdTestInvaliValue() {
+    new MockUp<OrdersFactory>() {
+        @Mock
+        public final int findByOrderItemIdByVenId(final int orderItemId, final int vendorId) {
+        return 0;
+        }
+      };
+    try {
+      Validators.validateVenOrdId(10, 20);
+      fail("validation failed");
+    } catch (IllegalArgumentException e) {
+      assertNotNull(e);
+      assertEquals("Invalid vendor Id or Order Id", e.getMessage());
+    }
+  }
+  /**
+*to test validate Vendor Id method.
+*/
+  @Test
+  public final void validateVenOrdIdTestValiValue() {
+    new MockUp<OrdersFactory>() {
+        @Mock
+        public final int findByOrderItemIdByVenId(final int ordItemId,  final int vendorId) {
+        return 5;
+        }
+    };
+    try {
+      Validators.validateVenOrdId(10, 20);
+    } catch (IllegalArgumentException e) {
+      fail("validation failed");
+    }
+  }
+/**
+*to test validate Vendor Id method and Order item Id.
+*/
+  @Test
+  public final void validateVenIdTestInvalidValue() {
+    new MockUp<VendorFactory>() {
+        @Mock
+        public final int findVendorId(final int vendorId) {
+        return 0;
+        }
+      };
+    try {
+      Validators.validateVendorId(10);
+      fail("validation failed");
+    } catch (IllegalArgumentException e) {
+      assertNotNull(e);
+      assertEquals("Invalid vendor Id", e.getMessage());
+    }
+  }
+  /**
+*to test validate Vendor Id method.
+*/
+  @Test
+  public final void validateVenIdTestValidValue() {
+    new MockUp<VendorFactory>() {
+        @Mock
+        public final int findVendorId(final int vendorId) {
+        return 5;
+        }
+    };
+    try {
+      Validators.validateVendorId(10);
+    } catch (IllegalArgumentException e) {
+      fail("validation failed");
+    }
   }
 }

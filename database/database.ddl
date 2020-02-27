@@ -9,7 +9,7 @@ CREATE TABLE `menu` (
   `MEN_ID` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `MEN_ITEM` varchar(50) DEFAULT NULL,
   `MEN_CALORIES` double NOT NULL,
-  `MEN_IMAGE` varchar(50) DEFAULT NULL,
+  `MEN_SPECIALITY` varchar(50) NOT NULL,
   PRIMARY KEY (`MEN_ID`)
 );
 
@@ -21,16 +21,18 @@ CREATE TABLE `menu` (
   `CUS_PHN_NO` varchar(50) NOT NULL,
   `CUS_USERNAME` varchar(50) NOT NULL,
   `CUS_PASSWORD` varchar(50) NOT NULL,
+  `CUS_EMAIL` varchar(50) NOT NULL,
   PRIMARY KEY (`CUS_ID`),
   UNIQUE KEY `CUS_PHN_NO` (`CUS_PHN_NO`),
   UNIQUE KEY `CUS_USERNAME` (`CUS_USERNAME`)
 );
 
+
 -- Creating Wallet table
  CREATE TABLE `wallet` (
   `CUS_ID` int(10) unsigned DEFAULT NULL,
   `WAL_ID` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `WAL_AMOUNT` double NOT NULL,
+  `WAL_AMOUNT` double unsigned NOT NULL,
   `WAL_SOURCE` enum('PAYTM','CREDIT_CARD','DEBIT_CARD') DEFAULT 'DEBIT_CARD',
   UNIQUE KEY `WAL_ID` (`WAL_ID`),
   UNIQUE KEY `WAL_SRC_CK` (`CUS_ID`,`WAL_SOURCE`),
@@ -45,9 +47,11 @@ CREATE TABLE `menu` (
   `VEN_PHN_NO` varchar(40) NOT NULL,
   `VEN_USERNAME` varchar(40) NOT NULL,
   `VEN_PASSWORD` varchar(30) NOT NULL,
+  `VEN_EMAIL` varchar(50) NOT NULL,
   `VEN_BALANCE` double DEFAULT NULL,
   PRIMARY KEY (`VEN_ID`)
-);
+) ;
+
 
 -- Creating orders table
 CREATE TABLE `orders` (
@@ -73,7 +77,7 @@ CREATE TABLE `orders` (
 CREATE TABLE `junc_menu_vendor` (
 `MEN_ID` int(10) unsigned NOT NULL,
 `VEN_ID` int(10) unsigned NOT NULL,
-`JUN_PRICE` double NOT NULL,
+`JUN_PRICE` double unsigned NOT NULL,
 `JUN_RATING` int(11) DEFAULT '0',
 `JUN_REVIEWS` varchar(50) DEFAULT NULL,
 KEY `MENS_ID_FK` (`MEN_ID`),
@@ -86,7 +90,7 @@ CONSTRAINT `VENS_ID_FK` FOREIGN KEY (`VEN_ID`) REFERENCES `vendor` (`VEN_ID`)
  CREATE TABLE `order_items` (
   `ORD_ITEM_ID` int(10) NOT NULL AUTO_INCREMENT,
   `MEN_ID` int(10) unsigned NOT NULL,
-  `MEN_PRICE` double NOT NULL,
+  `MEN_PRICE` double unsigned NOT NULL,
   `ORD_STATUS` enum('ACCEPTED','DENIED','PENDING') DEFAULT 'PENDING',
   `ORD_QUANTITY` int(10) unsigned DEFAULT '1',
   `ORD_ID` int(10) NOT NULL,

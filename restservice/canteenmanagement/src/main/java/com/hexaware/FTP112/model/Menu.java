@@ -19,6 +19,7 @@ public class Menu {
   private String venName;
   private String venPhnNo;
   private double menPrice;
+  private String menSpeciality;
   /**
    * Default Constructor.
    */
@@ -77,6 +78,12 @@ public class Menu {
   public final int getMenId() {
     return this.menuId;
   }
+    /**
+     * @return this food type.
+     */
+  public final String getMenSpeciality() {
+    return this.menSpeciality;
+  }
   /**
      * @return this Men item.
      */
@@ -125,6 +132,12 @@ public class Menu {
      */
   public final String getVenPhnNo() {
     return this.venPhnNo;
+  }
+    /**
+     * @param argMenSpeciality gets the food type.
+     */
+  public final void setMenSpeciality(final String argMenSpeciality) {
+    this.menSpeciality = argMenSpeciality;
   }
     /**
      * @param argMenId gets the food id.

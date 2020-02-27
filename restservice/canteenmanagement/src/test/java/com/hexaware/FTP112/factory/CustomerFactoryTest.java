@@ -84,6 +84,29 @@ public class CustomerFactoryTest {
     };
   }
   /**
+   Test class for findByCustomerId.
+   * @param dao to initialize wallet amount.
+   */
+  @Test
+    public final void findByCusId(@Mocked final CustomerDAO dao) {
+    new MockUp<CustomerFactory>() {
+        @Mock
+        public CustomerDAO dao() {
+            return dao;
+        }
+    };
+    new Expectations() { {
+            dao.fetchCusId(20); result = 10;
+      }
+    };
+    int count = CustomerFactory.findByCusId(20);
+    assertEquals(count, 10);
+    new Verifications() { {
+        dao.fetchCusId(20); times = 1;
+      }
+    };
+  }
+  /**
    Test class for testshowCustomer.
    * @param dao to initialize wallet amount.
    */
@@ -96,12 +119,12 @@ public class CustomerFactoryTest {
       }
         };
     List<Customer> list1 = new ArrayList();
-    list1.add(new Customer(1, "divi", "banu", "prathi"));
-    list1.add(new Customer(2, "gaurav", "kumar", "thakur"));
+    list1.add(new Customer(1, "divi", "banu", "prathi", "jennifa@gmail.com"));
+    list1.add(new Customer(2, "gaurav", "kumar", "thakur", "jennifa@gmail.com"));
     new Expectations() { {
         List<Customer> list2 = new ArrayList();
-        list2.add(new Customer(1, "divi", "banu", "prathi"));
-        list2.add(new Customer(2, "gaurav", "kumar", "thakur"));
+        list2.add(new Customer(1, "divi", "banu", "prathi", "jennifa@gmail.com"));
+        list2.add(new Customer(2, "gaurav", "kumar", "thakur", "jennifa@gmail.com"));
         dao.show(20); result = list2;
       } };
     List<Customer> customer = CustomerFactory.showCustomer(20);

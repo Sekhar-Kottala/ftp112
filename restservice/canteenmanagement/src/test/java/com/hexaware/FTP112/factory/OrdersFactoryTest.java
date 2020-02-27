@@ -237,6 +237,51 @@ public class OrdersFactoryTest {
         }
         };
   }
+      /**
+    *to test updateStatus method.
+    * @param dao to initialize wallet amount.
+    */
+  @Test
+  public final void updateCommentsTest(@Mocked final OrdersDAO dao) {
+    new MockUp<OrdersFactory>() {
+        @Mock
+        public OrdersDAO dao() {
+        return dao;
+      }
+        };
+    new Expectations() { {
+            dao.updateOrderComments(1, "orderrr");
+        }
+        };
+    OrdersFactory.updateComments(1, "orderrr");
+    new Verifications() { {
+            dao.updateOrderComments(1, "orderrr"); times = 1;
+        }
+        };
+  }
+
+  /**
+    *to test updateStatus method.
+    * @param dao to mock orders dao.
+    */
+  @Test
+  public final void updateCommentTest(@Mocked final OrdersDAO dao) {
+    new MockUp<OrdersFactory>() {
+        @Mock
+        public OrdersDAO dao() {
+        return dao;
+      }
+        };
+    new Expectations() { {
+            dao.updateOrderComments(10, "comments");
+        }
+        };
+    OrdersFactory.updateComments(10, "comments");
+    new Verifications() { {
+            dao.updateOrderComments(10, "comments"); times = 1;
+        }
+        };
+  }
   /**
     *to test showVendorHistory method.
     * @param dao to initialize wallet amount.
@@ -295,6 +340,29 @@ public class OrdersFactoryTest {
     assertEquals(price, 250.50, 0);
     new Verifications() { {
             dao.getPrice(10, 20); times = 1;
+        }
+        };
+  }
+  /**
+    *to test showBetween method.
+    * @param dao to initialize wallet amount.
+    */
+  @Test
+  public final void showBetweenTest(@Mocked final OrdersDAO dao) {
+    new MockUp<OrdersFactory>() {
+        @Mock
+        public OrdersDAO dao() {
+        return dao;
+      }
+        };
+    new Expectations() { {
+            dao.showBetween(1, "2019-01-01", "2019-01-31"); result = 250.50;
+        }
+        };
+    double price = OrdersFactory.showBetween(1, "2019-01-01", "2019-01-31");
+    assertEquals(price, 250.50, 0);
+    new Verifications() { {
+            dao.showBetween(1, "2019-01-01", "2019-01-31"); times = 1;
         }
         };
   }
@@ -363,6 +431,29 @@ public class OrdersFactoryTest {
     OrdersFactory.updateTotalPrice(250.50, 10);
     new Verifications() { {
             dao.updateTotalPrice(250.50, 10); times = 1;
+        }
+        };
+  }
+  /**
+    *to test findByOrderItemIdByVenId method.
+    * @param dao to initialize OrdersDAO.
+    */
+  @Test
+  public final void findByOrderItemIdByVenIdTest(@Mocked final OrdersDAO dao) {
+    new MockUp<OrdersFactory>() {
+        @Mock
+        public OrdersDAO dao() {
+        return dao;
+      }
+        };
+    new Expectations() { {
+            dao.findByOrderItemByVen(250, 50); result = 10;
+        }
+        };
+    int count = OrdersFactory.findByOrderItemIdByVenId(250, 50);
+    assertEquals(count, 10);
+    new Verifications() { {
+            dao.findByOrderItemByVen(250, 50); times = 1;
         }
         };
   }

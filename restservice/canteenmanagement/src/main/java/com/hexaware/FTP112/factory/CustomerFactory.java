@@ -43,6 +43,15 @@ public class CustomerFactory {
     int count = dao().fetchCustomerId(cusId, password);
     return count;
   }
+    /**
+   * Call the data base connection.
+   * @return the customerId.
+   * @param cusId to initialize customer Id.
+   */
+  public static int findByCusId(final int cusId) {
+    int count = dao().fetchCusId(cusId);
+    return count;
+  }
   /**
    * Call the data base connection.
    * @param cusId to initialize customer Id.

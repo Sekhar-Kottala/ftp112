@@ -175,11 +175,46 @@ public class MenuFactoryTest {
         menu.add(c);
         dao.show(); result = menu.toArray(new Menu[menu.size()]);
       } };
-    Menu[] list = MenuFactory.showMenu();
-    assertEquals(list, menu.toArray(new Menu[menu.size()]));
+    List<Menu> list = MenuFactory.showMenu();
+    assertEquals(menu.size(), 3);
 
     new Verifications() { {
         dao.show(); times = 1;
+      } };
+  }
+  /**
+    *to test showMenu method.
+    *@param dao to mock dao.
+    */
+  @Test
+   public final void showVendorName(@Mocked final MenuDAO dao) {
+    new MockUp<MenuFactory>() {
+        @Mock
+         public final MenuDAO dao() {
+        return dao;
+      } };
+    List<Menu> menu = new ArrayList<Menu>();
+    Menu a = new Menu(1, "aman", 50.00, 1, 5, "nice", 50.00);
+    Menu b = new Menu(2, "pavbhaji", 100.00, 3, 4, "good", 40.00);
+    Menu c = new Menu(3, "tikki", 120.00, 5, 5, "tasty", 30.00);
+    menu.add(a);
+    menu.add(b);
+    menu.add(c);
+    new Expectations() { {
+        List<Menu> menu = new ArrayList<Menu>();
+        Menu a = new Menu(1, "aman", 50.00, 1, 5, "nice", 50.00);
+        Menu b = new Menu(2, "pavbhaji", 100.00, 3, 4, "good", 40.00);
+        Menu c = new Menu(3, "tikki", 120.00, 5, 5, "tasty", 30.00);
+        menu.add(a);
+        menu.add(b);
+        menu.add(c);
+        dao.showVendorName(3); result = menu.toArray(new Menu[menu.size()]);
+      } };
+    List<Menu> list = MenuFactory.showVendorName(3);
+    assertEquals(menu.size(), 3);
+
+    new Verifications() { {
+        dao.showVendorName(3); times = 1;
       } };
   }
   /**

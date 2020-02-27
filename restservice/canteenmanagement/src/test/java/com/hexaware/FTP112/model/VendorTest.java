@@ -20,7 +20,7 @@ public class VendorTest {
 
   @Before
     public final void setUp() {
-    vendor = new Vendor(4, "divya", "9892345678", "prathi", 360.00);
+    vendor = new Vendor(4, "divya", "9892345678", "prathi", "jennifa@gmail.com", 360.00);
   }  /**
      * to test constuctor.
      */
@@ -33,6 +33,7 @@ public class VendorTest {
     assertEquals("9892345678", vendor.getVenPhoneNo());
     assertEquals("prathi", vendor.getVenUsername());
     assertEquals(360.00, vendor.getVenBalance(), 0);
+    assertEquals("jennifa@gmail.com", vendor.getVenEmail());
   }
   /**
      * to test vendor_Id.
@@ -93,6 +94,15 @@ public class VendorTest {
     assertNotEquals("prathi", vendor.getVenPassword());
     assertEquals("divi", vendor.getVenPassword());
   }
+  /**
+     * to test vendor_email.
+     */
+  @ Test
+   public final void testSetVenEmail() {
+    vendor.setVenEmail("jennifa13@gmail.com");
+    assertNotEquals("jennifa@gmail.com", vendor.getVenEmail());
+    assertEquals("jennifa13@gmail.com", vendor.getVenEmail());
+  }
        /**
      * to test constructor.
      */
@@ -105,8 +115,8 @@ public class VendorTest {
      */
   @Test
     public final void testEquals() {
-    Vendor x = new Vendor(4, "divya", "9892345678", "prathi", 360.00);
-    Vendor y = new Vendor(4, "divya", "9892345678", "prathi", 360.00);
+    Vendor x = new Vendor(4, "divya", "9892345678", "prathi", "jennifa@gmail.com", 360.00);
+    Vendor y = new Vendor(4, "divya", "9892345678", "prathi", "jennifa@gmail.com", 360.00);
     assertTrue(x.equals(y) && y.equals(x));
   }
     /**
@@ -114,8 +124,8 @@ public class VendorTest {
      */
   @Test
     public final void testNotEquals() {
-    Vendor x = new Vendor(4, "divya", "9892345678", "prathi", 360.00);
-    Vendor y = new Vendor(2, "kaviya", "9087654321", "kaatru", 260.00);
+    Vendor x = new Vendor(4, "divya", "9892345678", "prathi", "jennifa@gmail.com", 360.00);
+    Vendor y = new Vendor(2, "kaviya", "9087654321", "kaatru", "jennifa@gmail.com", 360.00);
     assertFalse(x.equals(y) && y.equals(x));
   }
     /**
@@ -123,8 +133,8 @@ public class VendorTest {
      */
   @Test
     public final void testHashCodeTrue() {
-    Vendor x = new Vendor(4, "divya", "9892345678", "prathi", 360.00);
-    Vendor y = new Vendor(4, "divya", "9892345678", "prathi", 360.00);
+    Vendor x = new Vendor(4, "divya", "9892345678", "prathi", "jennifa@gmail.com", 360.00);
+    Vendor y = new Vendor(4, "divya", "9892345678", "prathi", "jennifa@gmail.com", 360.00);
     assertTrue(x.hashCode() == y.hashCode());
   }
     /**
@@ -132,8 +142,8 @@ public class VendorTest {
      */
   @Test
     public final void testHashCodeFalse() {
-    Vendor x = new Vendor(4, "divya", "9892345678", "prathi", 360.00);
-    Vendor y = new Vendor(2, "kaviya", "9087654321", "kaatru", 260.00);
+    Vendor x = new Vendor(4, "divya", "9892345678", "prathi", "jennifa@gmail.com", 360.00);
+    Vendor y = new Vendor(2, "kaviya", "9087654321", "kaatru", "jennifa@gmail.com", 360.00);
     assertFalse((x.hashCode()) == (y.hashCode()));
   }
   /**
